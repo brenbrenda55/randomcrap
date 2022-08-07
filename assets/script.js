@@ -1,7 +1,17 @@
-// variables
+// generate elements
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
 var questionsEl = document.querySelector('questions');
+var qtextEl = document.getElementById('q-text')
+var choice1El = document.getElementById('choice-1')
+
+
+
+
+
+
+
+
 
 
 // timer countdown
@@ -109,12 +119,21 @@ var questions = [
 ];
 
 
-//call back function
-var elemt = document.getElementById('element');
 
-function callback() {
-    alert('Hello');
+
+//call back function
+var startbuttonEl = document.getElementById('start-button');
+
+function startquiz() {
+    qtextEl.textContent = questions[0].question
+
+    var answers = document.querySelectorAll('answers');
+
+  
+
+  
+
 }
 
 //add listner
-Element.addEventListner('click', callback);
+startbuttonEl.addEventListener('click', startquiz);

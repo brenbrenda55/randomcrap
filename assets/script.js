@@ -4,6 +4,10 @@ var mainEl = document.getElementById('main');
 var questionsEl = document.querySelector('questions');
 var qtextEl = document.getElementById('q-text')
 var choice1El = document.getElementById('choice-1')
+var choice2El = document.getElementById('choice-2')
+var choice3El = document.getElementById('choice-3')
+var choice2El = document.getElementById('choice-4')
+var answersEl = document.getElementById('answers')
 
 
 
@@ -126,8 +130,14 @@ var startbuttonEl = document.getElementById('start-button');
 
 function startquiz() {
     qtextEl.textContent = questions[0].question
-
-    var answers = document.querySelectorAll('answers');
+    console.log(questions)
+    choice1El.textContent = questions[1].answers
+    console.log(questions.answers)
+    //choice2El.textContent = questions[2].answers
+    //choice3El.textContent = questions[3].answers
+    //choice4El.textContent = questions[4].answers
+   
+  
 
   
 

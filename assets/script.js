@@ -6,64 +6,58 @@ var qtextEl = document.getElementById('q-text')
 var choice1El = document.getElementById('choice-1')
 var choice2El = document.getElementById('choice-2')
 var choice3El = document.getElementById('choice-3')
-var choice2El = document.getElementById('choice-4')
+var choice4El = document.getElementById('choice-4')
 var answersEl = document.getElementById('answers')
-
-
-
-
-
-
-
-
+var submitBtn = document.getElementById('submit-button')
+var answerschoice = document.querySelector('.answerchoice')
 
 
 // timer countdown
 var message =
-  'rip game over';
+    'rip game over';
 var words = message.split(' ');
 
 function countdown() {
     var timeLeft = 15;
-  
-    // TODO: Add a comment describing the functionality of the setInterval() method:
-    var timeInterval = setInterval(function () {
-      // TODO: Add comments describing the functionality of the `if` statement:
-      if (timeLeft > 1) {
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        timeLeft--;
-      } // TODO: Add comments describing the functionality of the `else if` statement:
-      else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } // TODO: Add comments describing the functionality of the `else` statement:
-      else {
-        timerEl.textContent = '';
-        clearInterval(timeInterval);
-        displayMessage();
-      }
-    }, 1000);
-  }
 
-  // Displays the message one word at a time
+
+    var timeInterval = setInterval(function () {
+
+        if (timeLeft > 1) {
+            timerEl.textContent = timeLeft + ' seconds remaining';
+            timeLeft--;
+        }
+        else if (timeLeft === 1) {
+            timerEl.textContent = timeLeft + ' second remaining';
+            timeLeft--;
+        }
+        else {
+            timerEl.textContent = '';
+            clearInterval(timeInterval);
+            displayMessage();
+        }
+    }, 1000);
+}
+
+
 function displayMessage() {
     var wordCount = 0;
-  
-    // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
+
+
     var msgInterval = setInterval(function () {
-      // If there are no more words left in the message
-      if (words[wordCount] === undefined) {
-        // Use `clearInterval()` to stop the timer
-        clearInterval(msgInterval);
-      } else {
-        // Display one word of the message
-        mainEl.textContent = words[wordCount];
-        wordCount++;
-      }
+
+        if (words[wordCount] === undefined) {
+
+            clearInterval(msgInterval);
+        } else {
+
+            mainEl.textContent = words[wordCount];
+            wordCount++;
+        }
     }, 1000);
-  }
-  
-  countdown();
+}
+
+
 
 
 
@@ -72,7 +66,7 @@ function displayMessage() {
 var questions = [
     {
         question: "What song did Doja Cat create all by her self; including costume, music video, and lyrics?",
-        answers : [
+        answers: [
             "moo",
             " streets",
             " woman ",
@@ -82,7 +76,7 @@ var questions = [
     },
     {
         question: "Who is jennifer lopez married to as of august 2022?",
-        answers : [
+        answers: [
             "marc anthony",
             " ben affleck",
             " cris judd ",
@@ -92,7 +86,7 @@ var questions = [
     },
     {
         question: "What is juice wrlds most famous song?",
-        answers : [
+        answers: [
             "all girls are the same",
             " burn",
             " lucid dreams ",
@@ -102,7 +96,7 @@ var questions = [
     },
     {
         question: "i like to eat, eat, eat, apples and _____?",
-        answers : [
+        answers: [
             "oranges",
             " kiwis",
             " pineapples",
@@ -112,7 +106,7 @@ var questions = [
     },
     {
         question: "Whos house did mr. krabs panty raid?",
-        answers : [
+        answers: [
             "mama krabs",
             " sandy cheeks",
             " mrs. puff ",
@@ -125,25 +119,58 @@ var questions = [
 
 
 
-//call back function
-var startbuttonEl = document.getElementById('start-button');
+//tips from will   keep track of what question im on-var    i-question im currently on    loop-will immeditately,
+//loop go through each elemt-button and the question div and uupdate corresponding the question array im in. 
+//need to occur on click, update the next question and the tthing im evualiting set a data attrivute to the element or the string text 
+var currentquestion = 0
+function updatequestion(){
+    qtextEl.textContent = questions[currentquestion].question
+    choice1El.textContent = questions[currentquestion].answers[0]
+    choice2El.textContent = questions[currentquestion].answers[1]
+    choice3El.textContent = questions[currentquestion].answers[2]
+    choice4El.textContent = questions[currentquestion].answers[3]
 
-function startquiz() {
-    qtextEl.textContent = questions[0].question
-    console.log(questions)
-    choice1El.textContent = questions[1].answers
-    console.log(questions.answers)
-    //choice2El.textContent = questions[2].answers
-    //choice3El.textContent = questions[3].answers
-    //choice4El.textContent = questions[4].answers
-   
-  
-
-  
-
-  
 
 }
 
+
+
+// loop
+//for (let currentquestion = 0; questions.length; currentquestion++) {
+    //textContent+= questions [currentquestion] + "<br>";
+//}
+
+
+//  data attribute ex
+var answerchoice = document.querySelector(".answerchoice")
+var anchoices = answerchoice.getAttribute('choice-1',"choice-2", "choice-3", "choice-4")
+
+
+
+
+
+
+//call back function
+var startbuttonEl = document.getElementById('start-button');
+
+function startquiz() {countdown();
+   updatequestion()
+
+
+}
+function evaluate (event){
+    console.log(event.target)//all the liogc to evealuate a right or wrong answer 
+    currentquestion ++
+}
 //add listner
 startbuttonEl.addEventListener('click', startquiz);
+
+answerschoice.addEventListener('click', evaluate)
+
+choice1El.addEventListener('click', evaluate)
+choice2El.addEventListener('click', evaluate)
+choice3El.addEventListener('click', evaluate)
+choice4El.addEventListener('click', evaluate)
+
+
+

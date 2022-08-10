@@ -60,9 +60,9 @@ function displayMessage() {
 
 
 // subtracttime from answering wrong questions
-document.getElementById('incorrect').addEventListener ('click', countdown())
-    sec -= 3;
-    document.getElementById('countdown').innerHTML='00:'+sec;
+//document.getElementById('incorrect').addEventListener ('click', countdown())
+  //  sec -= 3;
+    //document.getElementById('countdown').innerHTML='00:'+sec;
 
 
 

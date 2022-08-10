@@ -1,0 +1,57 @@
+
+
+/* h1 title */
+.random {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 2.5vw;
+    
+
+}
+
+/* timer */
+#countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* start button */
+#start-conatiner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+    
+}
+
+
+/* answer chocie button */
+.answerchoice {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 5vw;
+    font-size: medium;
+    background-color: darksalmon;
+    
+
+}
+
+/* question text */
+#q-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    
+}
+
+/* background color */
+.yess {
+    background-color: violet;
+}

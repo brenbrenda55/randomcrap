@@ -59,6 +59,12 @@ function displayMessage() {
 
 
 
+// subtracttime from answering wrong questions
+document.getElementById('incorrect').addEventListener ('click', countdown())
+    sec -= 3;
+    document.getElementById('countdown').innerHTML='00:'+sec;
+
+
 
 
 
@@ -142,8 +148,8 @@ function updatequestion(){
 
 
 //  data attribute ex
-var answerchoice = document.querySelector(".answerchoice")
-var anchoices = answerchoice.getAttribute('choice-1',"choice-2", "choice-3", "choice-4")
+//var answerchoice = document.querySelector(".answerchoice")
+//var anchoices = answerchoice.getAttribute('choice-1',"choice-2", "choice-3", "choice-4")
 
 
 
@@ -161,6 +167,7 @@ function startquiz() {countdown();
 function evaluate (event){
     console.log(event.target)//all the liogc to evealuate a right or wrong answer 
     currentquestion ++
+    updatequestion()
 }
 //add listner
 startbuttonEl.addEventListener('click', startquiz);

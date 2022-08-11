@@ -10,6 +10,9 @@ var choice4El = document.getElementById('choice-4')
 var answersEl = document.getElementById('answers')
 var submitBtn = document.getElementById('submit-button')
 
+let scores = [];
+let userScore = 0;
+
 //var incorrect = document.createElement('incorrect')
 
 
@@ -21,10 +24,19 @@ var words = message.split(' ');
 var timeLeft
 
 function countdown() {
-     timeLeft = 15;
+    timeLeft = 20;
 
 
     var timeInterval = setInterval(function () {
+
+        if (timeLeft === 0 || currentquestion >= questions.length - 1) {
+            // TODO: Then game is over
+            //const newScore = { userName: "Patrick", score: userScore }
+           // scores.push(newScore)
+            //localStorage.setItem("scores", JSON.stringify(scores))
+            clearInterval(timeInterval);
+            return alert("Game is over!!");
+        }
 
         if (timeLeft > 1) {
             timerEl.textContent = timeLeft + ' seconds remaining';
@@ -64,8 +76,8 @@ function displayMessage() {
 
 // subtract time from answering wrong questions
 //document.createElement('incorrect').addEventListener ('click', countdown())
-  //  sec -= 3;
-    //document.getElementById('countdown').innerHTML='00:'+sec;
+//  sec -= 3;
+//document.getElementById('countdown').innerHTML='00:'+sec;
 
 
 
@@ -77,51 +89,51 @@ var questions = [
         question: "What song did Doja Cat create all by her self; including costume, music video, and lyrics?",
         answers: [
             "moo",
-            " streets",
-            " woman ",
-            " get into it",
+            "streets",
+            "woman ",
+            "get into it",
         ],
-        correctAnswerIndex: 1
+        correctAnswerIndex: 0
     },
     {
         question: "Who is jennifer lopez married to as of august 2022?",
         answers: [
             "marc anthony",
-            " ben affleck",
-            " cris judd ",
-            " ojani noa",
+            "ben affleck",
+            "cris judd ",
+            "ojani noa",
         ],
-        correctAnswerIndex: 2
+        correctAnswerIndex: 1
     },
     {
         question: "What is juice wrlds most famous song?",
         answers: [
             "all girls are the same",
-            " burn",
-            " lucid dreams ",
-            " lean wit me",
+            "burn",
+            "lucid dreams ",
+            "lean wit me",
         ],
-        correctAnswerIndex: 3
+        correctAnswerIndex: 2
     },
     {
         question: "i like to eat, eat, eat, apples and _____?",
         answers: [
             "oranges",
-            " kiwis",
-            " pineapples",
-            " bananas",
+            "kiwis",
+            "pineapples",
+            "bananas",
         ],
-        correctAnswerIndex: 4
+        correctAnswerIndex: 3
     },
     {
         question: "Whos house did mr. krabs panty raid?",
         answers: [
             "mama krabs",
-            " sandy cheeks",
-            " mrs. puff ",
-            " karen plankton",
+            "sandy cheeks",
+            "mrs. puff ",
+            "karen plankton",
         ],
-        correctAnswerIndex: 1
+        correctAnswerIndex: 0
     },
 ];
 
@@ -132,7 +144,7 @@ var questions = [
 //loop go through each elemt-button and the question div and uupdate corresponding the question array im in. 
 //need to occur on click, update the next question and the tthing im evualiting set a data attrivute to the element or the string text 
 var currentquestion = 0
-function updatequestion(){
+function updatequestion() {
     qtextEl.textContent = questions[currentquestion].question
     choice1El.textContent = questions[currentquestion].answers[0]
     choice2El.textContent = questions[currentquestion].answers[1]
@@ -146,7 +158,7 @@ function updatequestion(){
 
 // loop
 //for (let currentquestion = 0; questions.length; currentquestion++) {
-    //textContent+= questions [currentquestion] + "<br>";
+//textContent+= questions [currentquestion] + "<br>";
 //}
 
 
@@ -163,21 +175,39 @@ function updatequestion(){
 //call back function
 var startbuttonEl = document.getElementById('start-button');
 
-function startquiz() { console.log(startquiz)
+function startquiz() {
+    console.log(startquiz)
     countdown();
-   updatequestion()
+    updatequestion()
 
 
 }
-function evaluate (event){
+function evaluate(event) {
     console.log(event.target)//all the liogc to evealuate a right or wrong answer 
-     var answerschoice = event.target.dataset.index
-     console.log(answerschoice)
-     console.log(questions[currentquestion].correctAnswerIndex)
-    if (answerschoice != questions[currentquestion].correctAnswerIndex) { 
-    timeLeft -= 5 
+    var answerschoice = Number(event.target.dataset.index);
+    console.log(answerschoice)
+    console.log(questions[currentquestion].correctAnswerIndex)
+    if (answerschoice != questions[currentquestion].correctAnswerIndex) {
+        timeLeft -= 3
+    } else {
+        // Yayy we select the correct answer
+        // TODO: we got the correct answer here
+        // alert("Yayy correct selected!");
+        userScore += 1.50;
     };
-    currentquestion ++
+
+    /// TODO: Figure out when the game ends
+    if (timeLeft === 0 || currentquestion >= questions.length - 1) {
+        // TODO: Then game is over
+        // [ {  userName: "john", score: 20 }, {  userName: "john", score: 20 } ]
+
+        // TODO: Dynamic usernamme to be generated
+        const newScore = { userName: "Patrick", score: userScore }
+        scores.push(newScore)
+        localStorage.setItem("scores", JSON.stringify(scores))
+        return alert("Game is over!!");
+    }
+    currentquestion++
     updatequestion()
 }
 //add listner
@@ -190,5 +220,34 @@ choice2El.addEventListener('click', evaluate)
 choice3El.addEventListener('click', evaluate)
 choice4El.addEventListener('click', evaluate)
 
+function loadUserScore() {
+    scores = JSON.parse(localStorage.getItem("scores"));
 
+    if (!scores) {
+        return null;
+    }
 
+    for (let i = 0; i < scores.length; i++) {
+        const currentScore = scores[i]; // { userName: "john", score: 20 }
+
+        const scoreEl = document.createElement("div")
+
+        // Backtick
+        // scoreEl.innerText = `Username: ${currentScore.userName}, score: ${currentScore.score}`
+        scoreEl.innerText = "Username: " + currentScore.userName + ", score: " + currentScore.score;
+
+        const userScoreDisplay = document.querySelector("#user-scores")
+
+        userScoreDisplay.appendChild(scoreEl)
+    }
+}
+
+loadUserScore();
+
+/*
+    User Story
+        - Save a list of user score and username inside localstorage
+        - Retrieve once they come back to the application
+        - Display to the page for them
+
+*/

@@ -12,4 +12,13 @@ Challenge 4- generating a time quiz
 
 * my css. stylesheet includes simple bacground color and button color. As well center alignment to text. 
 
-* My javascript
+* My javascript includes: variables, functions, dataatributes, setinterval, an array of question with its answers. 
+
+## URL link for website
+
+ https://brenbrenda55.github.io/randomcrap/
+
+
+## screenshot of final product
+
+<img src="quizproduct.png" width="500" height="auto"  >

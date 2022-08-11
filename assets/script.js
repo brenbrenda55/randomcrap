@@ -9,7 +9,8 @@ var choice3El = document.getElementById('choice-3')
 var choice4El = document.getElementById('choice-4')
 var answersEl = document.getElementById('answers')
 var submitBtn = document.getElementById('submit-button')
-var answerschoice = document.querySelector('.answerchoice')
+
+//var incorrect = document.createElement('incorrect')
 
 
 // timer countdown
@@ -17,8 +18,10 @@ var message =
     'rip game over';
 var words = message.split(' ');
 
+var timeLeft
+
 function countdown() {
-    var timeLeft = 15;
+     timeLeft = 15;
 
 
     var timeInterval = setInterval(function () {
@@ -59,8 +62,8 @@ function displayMessage() {
 
 
 
-// subtracttime from answering wrong questions
-//document.getElementById('incorrect').addEventListener ('click', countdown())
+// subtract time from answering wrong questions
+//document.createElement('incorrect').addEventListener ('click', countdown())
   //  sec -= 3;
     //document.getElementById('countdown').innerHTML='00:'+sec;
 
@@ -156,23 +159,31 @@ function updatequestion(){
 
 
 
+
 //call back function
 var startbuttonEl = document.getElementById('start-button');
 
-function startquiz() {countdown();
+function startquiz() { console.log(startquiz)
+    countdown();
    updatequestion()
 
 
 }
 function evaluate (event){
     console.log(event.target)//all the liogc to evealuate a right or wrong answer 
+     var answerschoice = event.target.dataset.index
+     console.log(answerschoice)
+     console.log(questions[currentquestion].correctAnswerIndex)
+    if (answerschoice != questions[currentquestion].correctAnswerIndex) { 
+    timeLeft -= 5 
+    };
     currentquestion ++
     updatequestion()
 }
 //add listner
 startbuttonEl.addEventListener('click', startquiz);
 
-answerschoice.addEventListener('click', evaluate)
+
 
 choice1El.addEventListener('click', evaluate)
 choice2El.addEventListener('click', evaluate)
